@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.d4k37.tonyplay"
     },
     "web": {
       "favicon": "./assets/favicon.png"
