@@ -14,6 +14,7 @@ import { useNavigation } from '@react-navigation/core';
 import{Background} from '../../components/Background'
 import {useAuth} from '../../hooks/auth'
 import { theme } from '../../@types/styles/theme';
+import { Home } from '../Home';
 
 
 export function SignIn(){
@@ -52,7 +53,7 @@ export function SignIn(){
           Seus Games {`\n`}Favoritos
           Com Amigos
         </Text>
-       { loading ? <ActivityIndicator color={theme.colors.primary} /> : <ButtonIcon title="ENTRAR COM O DISCORD"    onPress={HandleSignIn} />}
+       { loading ? <ActivityIndicator color={theme.colors.primary} /> : <ButtonIcon title="ENTRAR COM O DISCORD"    onPress={Home} />}
       
 
 
