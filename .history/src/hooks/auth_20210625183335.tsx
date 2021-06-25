@@ -9,12 +9,13 @@ import React,
 
 import * as AuthSession from 'expo-auth-session';
 
- const {SCOPE} = process.env
- const  {CLIENT_ID} = process.env
- const {CDN_IMAGE} = process.env
- const  {REDIRECT_URI} = process.env
- const {RESPONSE_TYPE} = process.env
-
+import {
+  SCOPE,
+  CLIENT_ID,
+  CDN_IMAGE,
+  REDIRECT_URI,
+  RESPONSE_TYPE
+} from '../configs';
 
 import { api } from '../services/api';
 import { Alert } from 'react-native';
@@ -79,7 +80,7 @@ function AuthProvider({ children }: AuthProviderProps) {
       const { type, params } = await AuthSession
       .startAsync({ authUrl }) as AuthorizationResponse;
 
-      if(type === "success"&& !params.error){ 
+      if(type === "success"){ 
 
         //const params = authSession.params as Dis
         api.defaults.headers.authorization = `Bearer ${params.access_token}`;
