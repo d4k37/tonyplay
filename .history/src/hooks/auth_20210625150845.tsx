@@ -8,6 +8,13 @@ import React,
 } from 'react';
 
 import * as AuthSession from 'expo-auth-session';
+import
+       {createContext,
+        useContext,
+        useState, 
+        ReactNode
+        } from 'react'
+
 
 import {
   SCOPE,
