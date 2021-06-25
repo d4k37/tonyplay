@@ -4,8 +4,7 @@ import React,
   createContext,
   useContext,
   useState,
-  ReactNode,
-  useEffect
+  ReactNode
 } from 'react';
 
 import * as AuthSession from 'expo-auth-session';
@@ -107,17 +106,7 @@ function AuthProvider({ children }: AuthProviderProps) {
       setLoading(false);
     }
   }
-  async function loadUserStorageData(){
-    const storage = await AsyncStorage.getItem(COLLECTION_USERS)
-    if(storage){
-      const userLogged = JSON.parse(storage) as User
-      api.defaults.headers.authorization = `Bearer ${userLogged.token}`
-      setUser(userLogged)
-    }
-  }
-  useEffect(()=>{
-    loadUserStorageData()
-  },[])
+
   return (
     <AuthContext.Provider value={{
       user,
