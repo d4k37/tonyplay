@@ -52,7 +52,7 @@ type AuthSessionResult = {
 
 type AuthorizationResponse = AuthSession.AuthSessionResult & {
   params: {
-    access_token: string;
+    code: string;
   }
 }
 
@@ -75,13 +75,16 @@ function AuthProvider({ children }: AuthProviderProps) {
 
       const authUrl = `${api.defaults.baseURL}/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`
 
-      const { type, params } = await AuthSession
-      .startAsync({ authUrl }) as AuthorizationResponse;
-
-      if(type === "success"){ 
-
+      // const { type, params } = await AuthSession
+      // .startAsync({ authUrl }) as AuthorizationResponse;
+      const authSession = await AuthSession
+      .startAsync({ authUrl })
+      console.log(authSession)
+      if(authSession.type === "success"){ 
+        const { type, params } = authSession as AuthorizationResponse
+        console.log(authSession.params)
         //const params = authSession.params as Dis
-        api.defaults.headers.authorization = `Bearer ${params.access_token}`;
+        api.defaults.headers.authorization = `Bearer ${params.code}`;
 
         const userInfo = await api.get('/users/@me');
 
@@ -91,7 +94,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         setUser({
           ...userInfo.data,
           firstName,
-          token: params.access_token
+          token: params.code
         });
         setLoading(false);
       }else{

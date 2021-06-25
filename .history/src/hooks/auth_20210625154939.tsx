@@ -18,7 +18,6 @@ import {
 } from '../configs';
 
 import { api } from '../services/api';
-import { Alert } from 'react-native';
 
 type User = {
   id: string;
@@ -39,29 +38,11 @@ type AuthProviderProps = {
   children: ReactNode;
 }
 
-type AuthSessionResult = {
-  type: 'error' | 'success';
-  errorCode: string | null;
-  error?: AuthSession.AuthError | null;
-  params: {
-      [key: string]: string;
-  };
-  authentication: AuthSession.TokenResponse | null;
-  url: string;
-}
-
 type AuthorizationResponse = AuthSession.AuthSessionResult & {
   params: {
     access_token: string;
   }
 }
-
-
-
-type DiscordParams = {
-  code: string
-}
-
 
 export const AuthContext = createContext({} as AuthContextData);
 
@@ -73,14 +54,12 @@ function AuthProvider({ children }: AuthProviderProps) {
     try {
       setLoading(true);
 
-      const authUrl = `${api.defaults.baseURL}/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`
+      const authUrl = "https://discord.com/api/oauth2/authorize?client_id=857673773818183720&redirect_uri=https%3A%2F%2Fauth.expo.io%2F%40d4k37%2Ftonyplay&response_type=code&scope=identify%20email%20connections%20guilds"
 
       const { type, params } = await AuthSession
       .startAsync({ authUrl }) as AuthorizationResponse;
 
       if(type === "success"){ 
-
-        //const params = authSession.params as Dis
         api.defaults.headers.authorization = `Bearer ${params.access_token}`;
 
         const userInfo = await api.get('/users/@me');
@@ -97,9 +76,8 @@ function AuthProvider({ children }: AuthProviderProps) {
       }else{
         setLoading(false);
       }
-    } catch(error) {
-      console.log(error)
-         Alert.alert(JSON.stringify("Não foi possível autenticar"));
+    } catch {
+     
     }
   }
 
