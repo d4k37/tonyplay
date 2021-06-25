@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 const REDIRECT_URI = 'https%3A%2F%2Fauth.expo.io%2F%40d4k37%2Ftonyplay'
+=======
+const REDIRECT_URI = 'https%3A%2F%2Fauth.expo.io%2Ftonyplay'
+>>>>>>> parent of 1efeb53 (up)
 =======
 const REDIRECT_URI = 'https%3A%2F%2Fauth.expo.io%2Ftonyplay'
 >>>>>>> parent of 1efeb53 (up)

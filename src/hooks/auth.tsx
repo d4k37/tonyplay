@@ -18,6 +18,9 @@ import * as AuthSession from 'expo-auth-session';
         ReactNode
         } 
 from 'react'
+<<<<<<< HEAD
+>>>>>>> parent of 1efeb53 (up)
+=======
 >>>>>>> parent of 1efeb53 (up)
 
 import {
